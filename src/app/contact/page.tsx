@@ -1,7 +1,7 @@
 import { SOCIALS, SITE, CONTACT_HIGHLIGHTS, CONTACT_SOCIALS, getIcon } from '../../lib/data'
 import { Metadata } from 'next'
 import { AnimatedSection } from '../../components/animated-section'
-import { Mail, Linkedin, Github, PenTool, Clock, MessageSquareText, Sparkles } from 'lucide-react'
+import { Mail } from 'lucide-react'
 import CopyEmail from '../../components/copy-email'
 
 export const metadata: Metadata = {
@@ -15,7 +15,7 @@ export default function ContactPage() {
     <div className="max-w-5xl mx-auto px-4 py-16 space-y-12">
       <AnimatedSection>
         <h1 className="text-3xl md:text-4xl font-bold mb-4">Contact</h1>
-        <p className="text-muted-foreground max-w-2xl">I'm always open to discussing new ideas, collaborations, or interesting problems in AI, web engineering, and product building.</p>
+  <p className="text-muted-foreground max-w-2xl">I&apos;m always open to discussing new ideas, collaborations, or interesting problems in AI, web engineering, and product building.</p>
       </AnimatedSection>
 
       <AnimatedSection className="grid gap-6 md:grid-cols-3">

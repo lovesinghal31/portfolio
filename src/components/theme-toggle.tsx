@@ -20,7 +20,9 @@ export function ThemeToggle() {
         aria-label="Toggle theme"
         className="relative h-10 w-10 opacity-0"
         disabled
-      />
+      >
+        <span />
+      </Button>
     )
   }
 

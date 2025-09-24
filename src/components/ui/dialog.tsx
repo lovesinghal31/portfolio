@@ -22,15 +22,15 @@ export function useDialog() {
   return ctx
 }
 
-export function DialogTrigger({ asChild, children }: { asChild?: boolean; children: React.ReactElement<any> }) {
+type ClickableElement = React.ReactElement<{ onClick?: (e: React.MouseEvent<Element>) => void }>
+export function DialogTrigger({ asChild, children }: { asChild?: boolean; children: ClickableElement }) {
   const { onOpenChange } = useDialog()
   if (asChild) {
-    return React.cloneElement(children, {
-      onClick: (e: any) => {
-        children.props?.onClick?.(e)
-        onOpenChange(true)
-      }
-    })
+    const handleClick = (e: React.MouseEvent) => {
+      children.props.onClick?.(e)
+      onOpenChange(true)
+    }
+    return React.cloneElement(children, { onClick: handleClick })
   }
   return <button onClick={() => onOpenChange(true)}>{children}</button>
 }
@@ -74,8 +74,8 @@ export function DialogContent({ className, children, title }: { className?: stri
   )
 }
 
-export function DialogTitle({ children }: { children: React.ReactNode }) {
-  return <h2 className="text-xl font-semibold mb-2 pr-8">{children}</h2>
+export function DialogTitle({ children, className }: { children: React.ReactNode; className?: string }) {
+  return <h2 className={cn('text-xl font-semibold mb-2 pr-8', className)}>{children}</h2>
 }
 
 export function DialogDescription({ children }: { children: React.ReactNode }) {

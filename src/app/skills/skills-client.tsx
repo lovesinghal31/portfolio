@@ -3,7 +3,7 @@ import { useMemo, useState } from 'react'
 import { SKILLS, SKILL_CATEGORY_ACCENTS } from '../../lib/data'
 import { Card, CardContent } from '../../components/ui/card'
 import { SkillMeter } from '../../components/skill-meter'
-import { motion } from 'motion/react'
+// removed unused motion import
 import { cn } from '../../lib/utils'
 import { Search, Filter, Code2, Box, Database, Wrench, Palette, Cpu, Sparkles } from 'lucide-react'
 import { useReducedMotion, motion as m } from 'motion/react'
@@ -95,9 +95,7 @@ export default function SkillsClient() {
                     'before:pointer-events-none before:absolute before:inset-0 before:opacity-0 before:transition-opacity before:duration-300',
                     'hover:shadow-[0_0_0_1px_hsl(var(--primary)/0.4),0_4px_18px_-2px_hsl(var(--primary)/0.25)] hover:before:opacity-100'
                   )}
-                  style={{
-                    ['--accent-color' as any]: accent.color
-                  }}
+                  style={{ '--accent-color': accent.color } as React.CSSProperties}
                 >
                   <AccentBorder />
                   <CardContent className="p-5 flex flex-col gap-4 relative z-10">

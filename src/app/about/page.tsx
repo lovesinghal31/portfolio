@@ -2,7 +2,7 @@ import { EDUCATION, EXPERIENCE, SITE, SKILLS, ABOUT_VALUE_CARDS, ABOUT_INTERESTS
 import { Metadata } from 'next'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../../components/ui/card'
 import { AnimatedSection } from '../../components/animated-section'
-import { Brain, Code2, Rocket, Sparkles, GraduationCap, Briefcase, Cpu, Compass } from 'lucide-react'
+import { GraduationCap, Briefcase, Cpu, Compass } from 'lucide-react'
 
 export const metadata: Metadata = {
   title: `About – ${SITE.name}`,
@@ -16,7 +16,7 @@ export default function AboutPage() {
         <div className="space-y-4">
           <h1 className="text-3xl md:text-4xl font-bold tracking-tight">About Me</h1>
           <p className="text-muted-foreground max-w-3xl leading-relaxed text-sm md:text-base">
-            I'm a Computer Science & Engineering student with a strong interest in practical AI, developer experience, and product-focused engineering. I love taking ambiguous ideas and turning them into clear, minimal, and robust software. Recently I've been exploring AI‑assisted user flows, automation workflows, and ways to improve iteration speed.
+            I&apos;m a Computer Science & Engineering student with a strong interest in practical AI, developer experience, and product-focused engineering. I love taking ambiguous ideas and turning them into clear, minimal, and robust software. Recently I&apos;ve been exploring AI‑assisted user flows, automation workflows, and ways to improve iteration speed.
           </p>
         </div>
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">

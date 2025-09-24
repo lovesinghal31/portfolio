@@ -3,10 +3,9 @@ import { cva, type VariantProps } from 'class-variance-authority'
 import { cn } from '../../lib/utils'
 
 // Minimal Slot implementation to avoid adding Radix dependency for now.
-const Slot = React.forwardRef<HTMLElement, React.HTMLAttributes<HTMLElement>>(function Slot(
-  { children, ...props }, ref
-) {
-  return React.cloneElement(children as any, { ref, ...props })
+interface SlotProps extends React.HTMLAttributes<HTMLElement> { children: React.ReactElement }
+const Slot = React.forwardRef<HTMLElement, SlotProps>(function Slot({ children, ...props }, ref) {
+  return React.cloneElement(children as React.ReactElement, { ...props, ref } as Record<string, unknown>)
 })
 
 // Button component (shadcn style) — edit variants or sizes as needed
@@ -35,16 +34,25 @@ const buttonVariants = cva(
   }
 )
 
-export interface ButtonProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement>,
-    VariantProps<typeof buttonVariants> {
+export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement>, VariantProps<typeof buttonVariants> {
   asChild?: boolean
+  children: React.ReactNode
 }
 
 export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant, size, asChild, ...props }, ref) => {
-    const Comp: any = asChild ? Slot : 'button'
-    return <Comp ref={ref} className={cn(buttonVariants({ variant, size, className }))} {...props} />
+  ({ className, variant, size, asChild, children, ...props }, ref) => {
+    if (asChild) {
+      return (
+        <Slot ref={ref as unknown as React.ForwardedRef<HTMLElement>} className={cn(buttonVariants({ variant, size, className }))} {...props}>
+          {children as React.ReactElement}
+        </Slot>
+      )
+    }
+    return (
+      <button ref={ref} className={cn(buttonVariants({ variant, size, className }))} {...props}>
+        {children}
+      </button>
+    )
   }
 )
 Button.displayName = 'Button'

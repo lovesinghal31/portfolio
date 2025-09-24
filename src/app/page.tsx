@@ -19,7 +19,7 @@ export default function Home() {
           className="space-y-10"
         >
           <div className="inline-flex items-center gap-2 rounded-full border px-4 py-1 text-xs text-muted-foreground">
-            <span>Hi, I'm</span> <span className="font-medium text-foreground">{SITE.name}</span>
+            <span>Hi, I&apos;m</span> <span className="font-medium text-foreground">{SITE.name}</span>
           </div>
           <div className="space-y-6 max-w-3xl">
             <h1 className="text-4xl md:text-6xl font-bold tracking-tight bg-gradient-to-b from-foreground to-foreground/60 text-transparent bg-clip-text leading-tight">

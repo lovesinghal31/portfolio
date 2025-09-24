@@ -19,7 +19,8 @@ export interface ContactHighlight { title: string; icon: IconName; body: string 
 export type SocialKey = 'email' | 'linkedin' | 'hashnode' | 'github'
 export interface ContactSocial { key: SocialKey; label: string; hrefKey: SocialKey; icon: IconName }
 
-const ICON_COMPONENTS: Record<IconName, React.ComponentType<any>> = {
+type IconComponent = React.ComponentType<React.SVGProps<SVGSVGElement>>
+const ICON_COMPONENTS: Record<IconName, IconComponent> = {
   sparkles: Sparkles,
   layers: Workflow,
   cpu: Cpu,
@@ -40,8 +41,8 @@ const ICON_COMPONENTS: Record<IconName, React.ComponentType<any>> = {
   message: MessageSquareText,
 }
 
-export function getIcon(name: IconName, className = 'size-3 text-primary'): React.ReactNode {
-  const Comp = ICON_COMPONENTS[name] || Sparkles
+export function getIcon(name: IconName, className = 'size-3 text-primary'): React.ReactElement {
+  const Comp: IconComponent = ICON_COMPONENTS[name] ?? Sparkles
   return React.createElement(Comp, { className })
 }
 
