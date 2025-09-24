@@ -78,6 +78,19 @@
   --sidebar-ring: oklch(0.708 0 0);
 }
 
+/* Base scaling: increase root font-size so 100% browser zoom ≈ previous 125% */
+html {
+  font-size: 125%; /* 16px * 1.25 = 20px */
+}
+
+/* Avoid crowding on very small viewports – gently reduce scale */
+@media (max-width: 640px) {
+  html { font-size: 115%; }
+}
+@media (max-width: 420px) {
+  html { font-size: 108%; }
+}
+
 .dark {
   --background: oklch(0.145 0 0);
   --foreground: oklch(0.985 0 0);
