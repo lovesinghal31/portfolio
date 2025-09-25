@@ -11,7 +11,7 @@ export default function Home() {
   return (
     <div className="relative overflow-hidden">
       <InteractiveBackground />
-      <section className="relative max-w-6xl mx-auto px-4 pt-28 pb-40">
+  <section className="relative max-w-6xl mx-auto px-4 pt-24 pb-32 sm:pt-28 sm:pb-40">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
@@ -22,25 +22,25 @@ export default function Home() {
             <span>Hi, I&apos;m</span> <span className="font-medium text-foreground">{SITE.name}</span>
           </div>
           <div className="space-y-6 max-w-3xl">
-            <h1 className="text-4xl md:text-6xl font-bold tracking-tight bg-gradient-to-b from-foreground to-foreground/60 text-transparent bg-clip-text leading-tight">
+            <h1 className="text-3xl xs:text-4xl md:text-6xl font-bold tracking-tight bg-gradient-to-b from-foreground to-foreground/60 text-transparent bg-clip-text leading-tight">
               {SITE.tagline}
             </h1>
-            <p className="text-base md:text-lg text-muted-foreground leading-relaxed">
+            <p className="text-sm sm:text-base md:text-lg text-muted-foreground leading-relaxed">
               {SITE.description}
             </p>
           </div>
-          <div className="flex flex-col sm:flex-row gap-4">
-            <Button asChild className="gap-2">
+          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 w-full sm:w-auto">
+            <Button asChild className="gap-2 w-full sm:w-auto">
               <a href="/resume.pdf" download>
                 <Download className="size-4" /> Download Resume
               </a>
             </Button>
-            <Button variant="outline" asChild className="gap-2">
+            <Button variant="outline" asChild className="gap-2 w-full sm:w-auto">
               <a href={SOCIALS.email}>
                 <Mail className="size-4" /> Contact Me
               </a>
             </Button>
-            <Button variant="ghost" asChild className="gap-1">
+            <Button variant="ghost" asChild className="gap-1 w-full sm:w-auto justify-center">
               <Link href="/projects">View Projects <ArrowRight className="size-4" /></Link>
             </Button>
           </div>
@@ -135,8 +135,8 @@ function AnimatedCounter({ value, className }: { value: number | string, classNa
 function HeroMosaic() {
   const items = HERO_MOSAIC
   return (
-    <AnimatedSection className="max-w-6xl mx-auto px-4 -mt-16">
-      <div className="grid gap-4 sm:grid-cols-3 lg:grid-cols-4 auto-rows-[150px]">
+    <AnimatedSection className="max-w-6xl mx-auto px-4 -mt-12 sm:-mt-16">
+      <div className="grid gap-3 sm:gap-4 grid-cols-2 xs:grid-cols-3 lg:grid-cols-4 auto-rows-[140px] sm:auto-rows-[150px]">
         {items.map(i => (
           <motion.div
             key={i.title}
@@ -171,14 +171,14 @@ function HeroMosaic() {
 function EngineeringPillars() {
   const pillars = ENGINEERING_PILLARS
   return (
-    <AnimatedSection className="max-w-6xl mx-auto px-4 mt-32 space-y-10">
-      <div className="flex items-center justify-between flex-wrap gap-4">
+    <AnimatedSection className="max-w-6xl mx-auto px-4 mt-28 sm:mt-32 space-y-8 sm:space-y-10">
+      <div className="flex items-center justify-between flex-wrap gap-3 sm:gap-4">
         <h2 className="text-2xl font-semibold tracking-tight">Engineering Pillars</h2>
         <Button variant="ghost" asChild className="h-8 px-3 text-xs">
           <Link href="/about" className="gap-1">About Me <ArrowRight className="size-4" /></Link>
         </Button>
       </div>
-      <div className="grid gap-5 md:grid-cols-3">
+      <div className="grid gap-4 sm:gap-5 md:grid-cols-3">
         {pillars.map(p => (
           <motion.div
             key={p.title}
@@ -199,14 +199,14 @@ function EngineeringPillars() {
 function LearningTimeline() {
   const periods = LEARNING_TIMELINE
   return (
-    <AnimatedSection className="max-w-6xl mx-auto px-4 mt-32 space-y-12">
-      <div className="flex items-center justify-between flex-wrap gap-4">
+    <AnimatedSection className="max-w-6xl mx-auto px-4 mt-28 sm:mt-32 space-y-10 sm:space-y-12">
+      <div className="flex items-center justify-between flex-wrap gap-3 sm:gap-4">
         <h2 className="text-2xl font-semibold tracking-tight">Learning Timeline</h2>
         <span className="text-xs text-muted-foreground">Focused progression of skills & practices</span>
       </div>
       {/* Alternating timeline */}
       <ol
-        className="relative grid gap-y-20 md:gap-y-28 md:grid-cols-[1fr_1px_1fr] before:absolute before:inset-y-0 before:left-1/2 before:-translate-x-1/2 before:w-px before:bg-gradient-to-b before:from-primary/50 before:via-primary/15 before:to-primary/0 after:absolute after:inset-y-0 after:left-1/2 after:-translate-x-1/2 after:w-[3px] after:bg-gradient-to-b after:from-primary/0 after:via-primary/5 after:to-primary/0 after:blur-[4px]"
+        className="relative grid gap-y-12 sm:gap-y-16 md:gap-y-24 md:grid-cols-[1fr_1px_1fr] md:before:absolute md:before:inset-y-0 md:before:left-1/2 md:before:-translate-x-1/2 md:before:w-px md:before:bg-gradient-to-b md:before:from-primary/50 md:before:via-primary/15 md:before:to-primary/0 md:after:absolute md:after:inset-y-0 md:after:left-1/2 md:after:-translate-x-1/2 md:after:w-[3px] md:after:bg-gradient-to-b md:after:from-primary/0 md:after:via-primary/5 md:after:to-primary/0 md:after:blur-[4px]"
       >
         {periods.map((p, idx) => {
           const isLeft = idx % 2 === 0
@@ -217,10 +217,10 @@ function LearningTimeline() {
                 'contents', // allow sub-items to participate in grid columns
               ].join(' ')}
             >
-              {/* Left column content (for even indexes on md+, otherwise full width) */}
+              {/* Desktop layout */}
               <div
                 className={[
-                  'relative md:col-start-1 md:col-end-2 flex',
+                  'relative hidden md:flex md:col-start-1 md:col-end-2',
                   isLeft ? 'justify-end' : 'justify-end md:opacity-0 md:pointer-events-none md:select-none',
                 ].join(' ')}
                 aria-hidden={!isLeft && true}
@@ -229,16 +229,14 @@ function LearningTimeline() {
                   <TimelineCard period={p.period} stage={idx + 1} items={p.items} side="left" />
                 )}
               </div>
-              {/* Center marker (vertically aligned with card midline) */}
-              <div className="relative md:col-start-2 md:col-end-3 flex md:justify-center items-center">
+              <div className="relative hidden md:flex md:col-start-2 md:col-end-3 md:justify-center items-center">
                 <span className="relative block size-5 rounded-full bg-gradient-to-br from-primary/70 via-primary/40 to-primary/20 ring-2 ring-primary/50 shadow-[0_0_0_3px_hsl(var(--background))]">
                   <span className="absolute inset-0 rounded-full bg-primary/30 blur-[6px] animate-pulse [animation-duration:4s]" aria-hidden />
                 </span>
               </div>
-              {/* Right column content (for odd indexes on md+, otherwise full width) */}
               <div
                 className={[
-                  'relative md:col-start-3 md:col-end-4 flex',
+                  'relative hidden md:flex md:col-start-3 md:col-end-4',
                   !isLeft ? 'justify-start' : 'justify-start md:opacity-0 md:pointer-events-none md:select-none',
                 ].join(' ')}
                 aria-hidden={isLeft && true}
@@ -247,9 +245,14 @@ function LearningTimeline() {
                   <TimelineCard period={p.period} stage={idx + 1} items={p.items} side="right" />
                 )}
               </div>
-              {/* Mobile single-column card (always after marker, visible only on small screens) */}
-              <div className="md:hidden col-span-full -mt-10">
-                <TimelineCard period={p.period} stage={idx + 1} items={p.items} side={isLeft ? 'left' : 'right'} mobile />
+              {/* Mobile single-column card */}
+              <div className="md:hidden col-span-full">
+                <div className="flex items-start gap-3">
+                  <span className="mt-2 shrink-0 relative block size-4 rounded-full bg-gradient-to-br from-primary/70 via-primary/40 to-primary/20 ring-2 ring-primary/40 shadow-[0_0_0_2px_hsl(var(--background))]">
+                    <span className="absolute inset-0 rounded-full bg-primary/25 blur-[4px] animate-pulse [animation-duration:4s]" aria-hidden />
+                  </span>
+                  <TimelineCard period={p.period} stage={idx + 1} items={p.items} side={isLeft ? 'left' : 'right'} mobile />
+                </div>
               </div>
             </li>
           )
@@ -298,14 +301,14 @@ function TimelineCard({ period, stage, items, side, mobile }: { period: string, 
 
 function SkillsPreview() {
   return (
-    <AnimatedSection className="max-w-6xl mx-auto px-4 mt-32 space-y-8">
-      <div className="flex items-center justify-between flex-wrap gap-4">
+    <AnimatedSection className="max-w-6xl mx-auto px-4 mt-28 sm:mt-32 space-y-6 sm:space-y-8">
+      <div className="flex items-center justify-between flex-wrap gap-3 sm:gap-4">
         <h2 className="text-2xl font-semibold tracking-tight">Core Stack Snapshot</h2>
         <Button variant="ghost" asChild className="h-8 px-3 text-xs">
           <Link href="/skills" className="gap-1">All Skills <ArrowRight className="size-4" /></Link>
         </Button>
       </div>
-      <div className="flex flex-wrap gap-2">
+      <div className="flex flex-wrap gap-1.5 sm:gap-2">
         {SKILLS.slice(0, 18).map(s => (
           <span key={s.name} className="rounded-md border bg-muted/40 px-2 py-1 text-[11px] font-medium tracking-wide hover:bg-muted transition-colors">{s.name}</span>
         ))}
@@ -317,12 +320,12 @@ function SkillsPreview() {
 function FocusAndLinks() {
   const focus = CURRENT_FOCUS
   return (
-    <AnimatedSection className="max-w-6xl mx-auto px-4 mt-32 mb-40 space-y-12">
+    <AnimatedSection className="max-w-6xl mx-auto px-4 mt-28 sm:mt-32 mb-32 sm:mb-40 space-y-10 sm:space-y-12">
       <div className="flex items-center gap-2">
         <Sparkles className="size-4 text-primary" />
         <h2 className="text-2xl font-semibold tracking-tight">Current Focus</h2>
       </div>
-      <div className="grid gap-6 md:grid-cols-3">
+      <div className="grid gap-4 sm:gap-6 md:grid-cols-3">
         {focus.map(i => (
           <motion.div
             key={i.title}
@@ -336,7 +339,7 @@ function FocusAndLinks() {
           </motion.div>
         ))}
       </div>
-      <div className="flex flex-wrap gap-4 pt-2 text-xs text-muted-foreground">
+      <div className="flex flex-wrap gap-3 sm:gap-4 pt-1 sm:pt-2 text-[11px] sm:text-xs text-muted-foreground">
         <a href={SOCIALS.github} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1 hover:text-foreground transition-colors"><Github className="size-3" /> GitHub</a>
         <a href={SOCIALS.linkedin} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1 hover:text-foreground transition-colors">LinkedIn</a>
         <a href={SOCIALS.hashnode} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1 hover:text-foreground transition-colors">Hashnode</a>
