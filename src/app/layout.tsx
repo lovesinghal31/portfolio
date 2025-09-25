@@ -1,4 +1,4 @@
-import type { Metadata } from 'next'
+import type { Metadata, Viewport } from 'next'
 import { Geist, Geist_Mono } from 'next/font/google'
 import '../app/globals.css'
 import { ThemeProvider } from '../components/theme-provider'
@@ -17,8 +17,13 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: `${SITE.name} – ${SITE.tagline}`,
+  metadataBase: new URL(SITE.url),
+  title: {
+    default: `${SITE.name} – ${SITE.tagline}`,
+    template: `%s – ${SITE.name}`
+  },
   description: SITE.description,
+  alternates: { canonical: SITE.url },
   openGraph: {
     title: `${SITE.name} – ${SITE.tagline}`,
     description: SITE.description,
@@ -40,7 +45,13 @@ export const metadata: Metadata = {
     description: SITE.description,
     images: [SITE.ogImage]
   },
-  metadataBase: new URL('https://example.com')
+}
+
+export const viewport: Viewport = {
+  themeColor: [
+    { media: '(prefers-color-scheme: light)', color: '#ffffff' },
+    { media: '(prefers-color-scheme: dark)', color: '#0a0a0a' }
+  ]
 }
 
 export default function RootLayout({
@@ -50,10 +61,38 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-  <body className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen flex flex-col overflow-x-hidden`}>        
+  <body className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen flex flex-col overflow-x-hidden`}>
+        {/* Skip link for keyboard users */}
+        <a
+          href="#main"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100] bg-primary text-primary-foreground px-4 py-2 rounded shadow"
+        >
+          Skip to main content
+        </a>
         <ThemeProvider>
           <Navbar />
-          <main className="flex-1">{children}</main>
+          <main id="main" className="flex-1 focus:outline-none">
+            {children}
+          </main>
+          {/* Structured Data */}
+          <script
+            type="application/ld+json"
+            // eslint-disable-next-line react/no-danger
+            dangerouslySetInnerHTML={{
+              __html: JSON.stringify({
+                '@context': 'https://schema.org',
+                '@type': 'Person',
+                name: SITE.name,
+                url: SITE.url,
+                description: SITE.description,
+                sameAs: [
+                  'https://github.com/lovesinghal31',
+                  'https://www.linkedin.com/in/love-singhal-65abb9333/',
+                  'https://hashnode.com/@lovesinghal'
+                ]
+              })
+            }}
+          />
           <Footer />
         </ThemeProvider>
       </body>
