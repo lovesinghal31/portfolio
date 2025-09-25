@@ -78,17 +78,17 @@
   --sidebar-ring: oklch(0.708 0 0);
 }
 
-/* Base scaling: increase root font-size so 100% browser zoom ≈ previous 125% */
-html {
-  font-size: 125%; /* 16px * 1.25 = 20px */
+/* Fluid type scale: 16px base on mobile → ~19–20px on large screens */
+html { font-size: clamp(15px, 0.95rem + 0.4vw, 20px); }
+
+/* Slightly reduce base when user has very narrow viewport to avoid horizontal wrapping */
+@media (max-width: 380px) {
+  html { font-size: clamp(14px, 0.875rem + 0.5vw, 17px); }
 }
 
-/* Avoid crowding on very small viewports – gently reduce scale */
-@media (max-width: 640px) {
-  html { font-size: 115%; }
-}
-@media (max-width: 420px) {
-  html { font-size: 108%; }
+/* Provide an extra step on very large displays */
+@media (min-width: 1600px) {
+  html { font-size: clamp(16px, 1rem + 0.6vw, 21px); }
 }
 
 .dark {
