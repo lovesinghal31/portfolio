@@ -12,11 +12,24 @@ export const siteConfig = {
     email: "lovesinghal31@gmail.com",
   },
   creator: "Love Singhal",
+  twitterHandle: "@lovesinghal31",
   location: "Indore, India",
   role: "Backend Engineer",
   roles: ["Backend Engineer", "Full Stack Developer", "AI Enthusiast"],
   status: "Computer Science Student",
   resume: "/resume.pdf",
+  keywords: [
+    "Love Singhal",
+    "Backend Engineer",
+    "Full Stack Developer",
+    "Software Engineer",
+    "Computer Science",
+    "React",
+    "Next.js",
+    "TypeScript",
+    "System Design",
+    "Indore"
+  ],
 } as const
 
 export type SiteConfig = typeof siteConfig

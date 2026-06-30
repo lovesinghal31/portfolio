@@ -6,6 +6,7 @@ export const metadata: Metadata = constructMetadata({
   title: "Now — Love Singhal",
   description:
     "What I am currently building, learning, reading, and working towards.",
+  url: "/now",
 })
 
 export default function Page() {

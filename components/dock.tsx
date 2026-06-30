@@ -115,11 +115,12 @@ export function Dock({ onCommandPalette }: DockProps) {
   ]
 
   return (
-    <motion.div
+    <motion.nav
       className="fixed bottom-6 left-1/2 z-40 hidden md:flex"
       initial={{ y: 100, x: "-50%", opacity: 0 }}
       animate={{ y: 0, x: "-50%", opacity: 1 }}
       transition={{ delay: 1, duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }}
+      aria-label="Main Navigation Dock"
     >
       <motion.div
         className="flex items-end gap-2 rounded-2xl border border-border/60 bg-background/80 px-3 py-2 backdrop-blur-xl shadow-lg"
@@ -130,6 +131,6 @@ export function Dock({ onCommandPalette }: DockProps) {
           <DockIcon key={i} mouseX={mouseX} item={item} />
         ))}
       </motion.div>
-    </motion.div>
+    </motion.nav>
   )
 }

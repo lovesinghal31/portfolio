@@ -1,4 +1,8 @@
+import type { Metadata } from "next"
+import { constructMetadata } from "@/lib/metadata"
 import { ClientShell } from "@/components/client-shell"
+import { PersonJsonLd, WebsiteJsonLd, FAQJsonLd } from "@/components/seo/json-ld"
+import { faqItems } from "@/data/faq"
 import { Hero } from "@/sections/hero"
 import { About } from "@/sections/about"
 import { Skills } from "@/sections/skills"
@@ -10,9 +14,16 @@ import { FAQ } from "@/sections/faq"
 import { Contact } from "@/sections/contact"
 import { Footer } from "@/sections/footer"
 
+export const metadata: Metadata = constructMetadata({
+  url: "/",
+})
+
 export default function Page() {
   return (
     <ClientShell>
+      <PersonJsonLd />
+      <WebsiteJsonLd />
+      <FAQJsonLd faqs={faqItems} />
       <main>
         <Hero />
         <div className="gradient-line" />
