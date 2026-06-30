@@ -4,7 +4,7 @@ import { motion, useInView } from "framer-motion"
 import { useRef, useState } from "react"
 import { Section } from "@/components/section"
 import { Card3D } from "@/components/card-3d"
-import { skills, skillCategories, getSkillsByCategory } from "@/data/skills"
+import { skillCategories, getSkillsByCategory } from "@/data/skills"
 import { staggerContainer, staggerItem } from "@/animations/variants"
 import { cn } from "@/lib/utils"
 

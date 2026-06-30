@@ -1,6 +1,7 @@
 "use client"
 
-import { useState, useEffect, useCallback, useRef } from "react"
+import { useState, useEffect, useRef } from "react"
+import { useRouter } from "next/navigation"
 import { motion, AnimatePresence } from "framer-motion"
 import {
   Search,
@@ -38,8 +39,24 @@ interface CommandPaletteProps {
 export function CommandPalette({ isOpen, onClose }: CommandPaletteProps) {
   const [query, setQuery] = useState("")
   const [selectedIndex, setSelectedIndex] = useState(0)
+  const [prevIsOpen, setPrevIsOpen] = useState(isOpen)
+  const [prevQuery, setPrevQuery] = useState("")
   const inputRef = useRef<HTMLInputElement>(null)
   const { resolvedTheme, setTheme } = useTheme()
+  const router = useRouter()
+
+  if (isOpen !== prevIsOpen) {
+    setPrevIsOpen(isOpen)
+    if (isOpen) {
+      setQuery("")
+      setSelectedIndex(0)
+    }
+  }
+
+  if (query !== prevQuery) {
+    setPrevQuery(query)
+    setSelectedIndex(0)
+  }
 
   const commands: CommandItem[] = [
     // Navigation
@@ -57,8 +74,8 @@ export function CommandPalette({ isOpen, onClose }: CommandPaletteProps) {
     { id: "twitter", icon: <TwitterIcon className="h-4 w-4" />, label: "Open Twitter / X", group: "Links", action: () => { window.open(siteConfig.links.twitter, "_blank"); onClose() } },
     { id: "email", icon: <Mail className="h-4 w-4" />, label: `Email ${siteConfig.links.email}`, group: "Links", action: () => { window.open(`mailto:${siteConfig.links.email}`); onClose() } },
     // Pages
-    { id: "now", icon: <FileText className="h-4 w-4" />, label: "View Now Page", group: "Pages", action: () => { window.location.href = "/now"; onClose() } },
-    { id: "codepilot", icon: <ExternalLink className="h-4 w-4" />, label: "View CodePilot Case Study", group: "Pages", action: () => { window.location.href = "/projects/codepilot"; onClose() } },
+    { id: "now", icon: <FileText className="h-4 w-4" />, label: "View Now Page", group: "Pages", action: () => { router.push("/now"); onClose() } },
+    { id: "codepilot", icon: <ExternalLink className="h-4 w-4" />, label: "View CodePilot Case Study", group: "Pages", action: () => { router.push("/projects/codepilot"); onClose() } },
   ]
 
   const scrollTo = (id: string) => {
@@ -83,38 +100,29 @@ export function CommandPalette({ isOpen, onClose }: CommandPaletteProps) {
 
   useEffect(() => {
     if (isOpen) {
-      setQuery("")
-      setSelectedIndex(0)
       setTimeout(() => inputRef.current?.focus(), 50)
     }
   }, [isOpen])
 
-  useEffect(() => {
-    setSelectedIndex(0)
-  }, [query])
-
-  const handleKeyDown = useCallback(
-    (e: React.KeyboardEvent) => {
-      switch (e.key) {
-        case "ArrowDown":
-          e.preventDefault()
-          setSelectedIndex((i) => (i + 1) % flatItems.length)
-          break
-        case "ArrowUp":
-          e.preventDefault()
-          setSelectedIndex((i) => (i - 1 + flatItems.length) % flatItems.length)
-          break
-        case "Enter":
-          e.preventDefault()
-          flatItems[selectedIndex]?.action()
-          break
-        case "Escape":
-          onClose()
-          break
-      }
-    },
-    [flatItems, selectedIndex, onClose]
-  )
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    switch (e.key) {
+      case "ArrowDown":
+        e.preventDefault()
+        setSelectedIndex((i) => (i + 1) % flatItems.length)
+        break
+      case "ArrowUp":
+        e.preventDefault()
+        setSelectedIndex((i) => (i - 1 + flatItems.length) % flatItems.length)
+        break
+      case "Enter":
+        e.preventDefault()
+        flatItems[selectedIndex]?.action()
+        break
+      case "Escape":
+        onClose()
+        break
+    }
+  }
 
   return (
     <AnimatePresence>

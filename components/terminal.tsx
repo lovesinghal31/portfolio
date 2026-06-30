@@ -29,11 +29,9 @@ export function Terminal({
   className,
   title = "terminal",
 }: TerminalProps) {
-  const [visibleLines, setVisibleLines] = useState(0)
   const [currentChar, setCurrentChar] = useState(0)
   const [phase, setPhase] = useState<"prompt" | "output">("prompt")
   const [currentCommand, setCurrentCommand] = useState(0)
-  const totalLines = commands.length * 2
   const intervalRef = useRef<NodeJS.Timeout | null>(null)
 
   useEffect(() => {
@@ -58,7 +56,6 @@ export function Terminal({
     } else {
       // Show output instantly, then move to next command
       setTimeout(() => {
-        setVisibleLines((prev) => prev + 1)
         setPhase("prompt")
         setCurrentChar(0)
         setCurrentCommand((prev) => prev + 1)
